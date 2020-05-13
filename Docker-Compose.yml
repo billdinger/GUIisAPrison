@@ -1,0 +1,20 @@
+---
+version: "3.7"
+networks:
+ guiprison:
+   driver: bridge
+services:
+  guiprison:
+   container_name: guiprison
+   image: guiprison:1.0
+   volumes:
+      - type: bind
+        source: ./
+        target: /tmp/playbook
+   ports:
+    - "8080:8080"
+   networks:
+    - guiprison
+volumes:
+  ansible:
+...

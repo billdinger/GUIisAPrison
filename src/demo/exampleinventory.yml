@@ -1,0 +1,65 @@
+all:
+  children:
+    ungrouped:
+      hosts:
+        104.198.215.65:
+          cpuPlatform: Intel Haswell
+          creationTimestamp: '2020-05-10T16:42:50.029-07:00'
+          deletionProtection: false
+          disks:
+          - autoDelete: true
+            boot: true
+            deviceName: persistent-disk-0
+            diskSizeGb: '20'
+            guestOsFeatures:
+            - type: UEFI_COMPATIBLE
+            index: 0
+            interface: SCSI
+            kind: compute#attachedDisk
+            licenses:
+            - https://www.googleapis.com/compute/v1/projects/centos-cloud/global/licenses/centos-8
+            mode: READ_WRITE
+            source: https://www.googleapis.com/compute/v1/projects/ansible-276720/zones/us-central1-a/disks/disk-ansible
+            type: PERSISTENT
+          fingerprint: Q6Awhmlg8Xs=
+          id: '9132541855879475094'
+          image: null
+          kind: compute#instance
+          labelFingerprint: 42WmSpB8rSM=
+          machineType: f1-micro
+          machineType_selflink: https://www.googleapis.com/compute/v1/projects/ansible-276720/zones/us-central1-a/machineTypes/f1-micro
+          metadata: {}
+          name: ansible-vm
+          networkInterfaces:
+          - accessConfigs:
+            - kind: compute#accessConfig
+              name: External NAT
+              natIP: 104.198.215.65
+              networkTier: PREMIUM
+              type: ONE_TO_ONE_NAT
+            fingerprint: tdf1M4uSIxE=
+            kind: compute#networkInterface
+            name: nic0
+            network:
+              name: network-ansible
+              region: global
+              selfLink: https://www.googleapis.com/compute/v1/projects/ansible-276720/global/networks/network-ansible
+            networkIP: 10.240.0.2
+          project: ansible-276720
+          scheduling:
+            automaticRestart: true
+            onHostMaintenance: MIGRATE
+            preemptible: false
+          selfLink: https://www.googleapis.com/compute/v1/projects/ansible-276720/zones/us-central1-a/instances/ansible-vm
+          shieldedInstanceConfig:
+            enableIntegrityMonitoring: true
+            enableSecureBoot: false
+            enableVtpm: true
+          shieldedInstanceIntegrityPolicy:
+            updateAutoLearnPolicy: true
+          startRestricted: false
+          status: RUNNING
+          tags:
+            fingerprint: 42WmSpB8rSM=
+          zone: us-central1-a
+          zone_selflink: https://www.googleapis.com/compute/v1/projects/ansible-276720/zones/us-central1-a

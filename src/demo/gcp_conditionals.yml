@@ -1,0 +1,11 @@
+---
+- name: Demo Conditional Run
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - shell: echo "only targetting docker"
+    when: ansible_facts['virtualization_type'] == "docker"
+  - debug: var=ansible_facts

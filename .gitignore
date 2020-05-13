@@ -1,0 +1,6 @@
+# Prevent accidently storing GCP cloud credentials or
+# ssh keys
+*.json
+*.pub
+*.ppk
+*.private

@@ -1,0 +1,69 @@
+---
+- name: Demo Creat Handlers
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - name: create a disk
+    gcp_compute_disk:
+      name: disk-ansible-handlers
+      size_gb: 20
+      source_image: projects/centos-cloud/global/images/family/centos-8
+      zone: "{{ zone }}"
+      state: present
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+    register: disk
+  - name: create a network
+    gcp_compute_network:
+         name: 'network-ansible-handlers'
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_auth_kind }}"
+         service_account_file: "{{ gcp_credentials_file }}"
+         scopes:
+           - https://www.googleapis.com/auth/compute
+         state: present
+    register: network
+  - name: create a address
+    gcp_compute_address:
+        name: 'address-ansible-handlers'
+        project: "{{ gcp_project }}"
+        region: "{{ region }}"
+        auth_kind: "{{ gcp_auth_kind }}"
+        service_account_file: "{{ gcp_credentials_file }}"
+        scopes:
+           - https://www.googleapis.com/auth/compute
+        state: present
+    register: address
+  - name: create a instance
+    gcp_compute_instance:
+         state: present
+         name: ansible-vm-handlers
+         machine_type: f1-micro
+         disks:
+           - auto_delete: false
+             boot: true
+             source: "{{ disk }}"
+         network_interfaces:
+             - network: "{{ network }}"
+               access_configs:
+                 - name: 'External NAT'
+                   nat_ip: "{{ address }}"
+                   type: 'ONE_TO_ONE_NAT'
+         zone: "{{ zone }}"
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_auth_kind }}"
+         service_account_file: "{{ gcp_credentials_file }}"
+         scopes:
+           - https://www.googleapis.com/auth/compute
+    register: instance
+  handlers:
+    - name: Add tags to instance
+      gce_tag:
+        instance_name: "{{ instance.name}}"
+        tags: ansible-tags
+        zone: "{{ zone }}"
+        state: present

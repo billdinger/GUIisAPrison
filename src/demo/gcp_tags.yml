@@ -1,0 +1,35 @@
+---
+- name: Demo Create Firewall
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - name: GCP Firewall
+    gcp_compute_firewall:
+      name: ansiblefirewall
+      allowed:
+      - ip_protocol: tcp
+        ports:
+        - '22'
+      target_tags:
+      - ansible-ssh
+      source_tags:
+      - ansible-ssh-clients
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+      state: present
+    tags:
+      - firewall
+  - name: Demo Queue
+    gcp_cloudtasks_queue:
+      name: ansiblequeue
+      location:  "{{ region }}"
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+      state: present
+    tags:
+      - queue

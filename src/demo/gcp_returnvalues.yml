@@ -1,0 +1,17 @@
+- name: Demo create instance
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - name: create a topic
+    gcp_pubsub_topic:
+      name: ansible-topic1
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+      state: present
+    register: ansible_pubsub_output
+  - debug:
+      var: ansible_pubsub_output

@@ -1,0 +1,50 @@
+---
+- name: Demo Remove Instance
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - name: Delete instance
+    gcp_compute_instance:
+         state: absent
+         name: ansible-vm
+         machine_type: f1-micro
+         zone: "{{ zone }}"
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_auth_kind }}"
+         service_account_file: "{{ gcp_credentials_file }}"
+         scopes:
+           - https://www.googleapis.com/auth/compute
+  - name: Delete address
+    gcp_compute_address:
+        name: 'address-ansible'
+        project: "{{ gcp_project }}"
+        region: "{{ region }}"
+        auth_kind: "{{ gcp_auth_kind }}"
+        service_account_file: "{{ gcp_credentials_file }}"
+        scopes:
+           - https://www.googleapis.com/auth/compute
+        state: absent
+  - name: Delete a disk
+    gcp_compute_disk:
+      name: disk-ansible
+      size_gb: 20
+      source_image: projects/centos-cloud/global/images/family/centos-8
+      zone: "{{ zone }}"
+      state: absent
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+    register: disk
+  - name: Delete network
+    gcp_compute_network:
+         name: 'network-ansible'
+         project: "{{ gcp_project }}"
+         auth_kind: "{{ gcp_auth_kind }}"
+         service_account_file: "{{ gcp_credentials_file }}"
+         scopes:
+           - https://www.googleapis.com/auth/compute
+         state: absent
+    register: network

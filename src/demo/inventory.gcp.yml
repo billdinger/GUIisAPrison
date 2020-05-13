@@ -1,0 +1,5 @@
+plugin: gcp_compute
+projects:
+  - ansible-276720
+auth_kind: serviceaccount
+service_account_file: /tmp/playbook/ansible.json

@@ -1,0 +1,24 @@
+---
+- name: Demo GCP state
+  hosts: localhost
+  gather_facts: no
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+    - name: GCP State changed?
+      shell: echo '***CHANGED***'
+      register: gcpStateResult
+      changed_when: "'***CHANGED***'in gcpStateResult.stdout"
+    - name: GCP state not changed
+      shell: echo 'some stuff here'
+      register: gcpStateNotResult
+      changed_when: "'***CHANGED***'in gcpStateNotResult.stdout"
+    - name: GCP state not changed
+      shell: echo 'some stuff here'
+      register: gcpStateNotResult
+      changed_when: "'***CHANGED***'in gcpStateNotResult.stdout"
+    - name: GCP File
+      shell: echo 'some stuff here'
+      args:
+        creates: /tmp/state.txt
