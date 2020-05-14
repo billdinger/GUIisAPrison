@@ -15,6 +15,8 @@ services:
     - "8080:8080"
    networks:
     - guiprison
+   environment:
+    - ANSIBLE_CONFIG=/tmp/playbook/src/ansible.cfg
 volumes:
   ansible:
 ...

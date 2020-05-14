@@ -19,6 +19,6 @@
       register: gcpStateNotResult
       changed_when: "'***CHANGED***'in gcpStateNotResult.stdout"
     - name: GCP File
-      shell: echo 'some stuff here'
+      shell: echo 'some stuff here' >> /tmp/state.txt
       args:
         creates: /tmp/state.txt

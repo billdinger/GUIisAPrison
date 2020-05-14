@@ -1,0 +1,18 @@
+---
+# dummy inventory showing how we'd setup some hosts
+# with different roles
+all:
+  hosts:
+    WEBSERVERA:
+    WEBSERVERB:
+    APPSERVERA:
+    APPSERVERB:
+  children:
+    web:
+      hosts:
+        WEBSERVERA:
+        WEBSERVERB:
+    app:
+      hosts:
+        APPSERVERA:
+        APPSERVERB:

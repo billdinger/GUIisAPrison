@@ -1,0 +1,3 @@
+---
+# this would contain meta for the given role - specifically would allow you to defined dependencies from other part of the 
+# src structure and pull them in to be used by the plays in this role.

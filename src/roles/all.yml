@@ -1,0 +1,9 @@
+---
+# this is a demo of what a playbook would look like that references a role. Specifically this would
+# tell all hosts in the app role (as defined by the inventory.yml) they would get all the plays specified
+# in common and app
+- name: Apply App plays
+  hosts: web
+  roles:
+    - common
+    - web

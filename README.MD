@@ -8,7 +8,8 @@ If wanting to use GCP follow the steps under Pre-Reqs.
 1. Pull repo down.
 2. from repo directory run `docker build --tag guiprison:1.0 .`
 3. from root run `docker-compose run guiprison bash`
-4. Get ansibling! All playbooks are in the `src` directory.
+4. Get ansibling! All playbooks are in the `src` directory. The talk goes through various things in the `src/demo` directory which also has a readme 
+detailing what each file is.
 
 ### Pre-Reqs for GCP
 
