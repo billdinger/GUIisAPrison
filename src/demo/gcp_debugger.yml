@@ -1,0 +1,20 @@
+- name: Demo the Debugger!
+  hosts: localhost
+  gather_facts: yes
+  vars_files:
+    - /tmp/playbook/src/demo/gcp_auth.yml
+    - /tmp/playbook/src/demo/gcp_zones.yml
+  tasks:
+  - name: create a disk
+    gcp_compute_disk:
+      name: disk-ansible
+      size_gb: 20
+      source_image: projects/centos-cloud/global/images/family/centos-8
+      zone: "{{ zone }}"
+      state: present
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+    register: disk
+    debugger: on_skipped
+    when: ansible_facts['virtualization_type'] == "Docker"

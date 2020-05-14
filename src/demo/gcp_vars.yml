@@ -1,0 +1,5 @@
+---
+# roughly a million of these, but some small examples: https://docs.ansible.com/ansible/latest/user_guide/playbooks_filters.html#playbooks-filters
+regex: "{{ 'ansible is awesome' | regex_search('(ansible)') }}"
+ternary: "{{ (name == "Bill") | ternary('yay','boo') }}""
+capital: "{{ bill | capitalize }}"
