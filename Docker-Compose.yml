@@ -1,11 +1,11 @@
 ---
 version: "3.7"
 networks:
- guiprison:
+ ansible:
    driver: bridge
 services:
-  guiprison:
-   container_name: guiprison
+  ansible:
+   container_name: ansible
    image: guiprison:1.0
    volumes:
       - type: bind
@@ -14,7 +14,7 @@ services:
    ports:
     - "8080:8080"
    networks:
-    - guiprison
+    - ansible
    environment:
     - ANSIBLE_CONFIG=/tmp/playbook/src/ansible.cfg
 volumes:

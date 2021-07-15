@@ -22,6 +22,7 @@
          name: 'network-ansible'
          project: "{{ gcp_project }}"
          auth_kind: "{{ gcp_auth_kind }}"
+         auto_create_subnetworks: "yes"
          service_account_file: "{{ gcp_credentials_file }}"
          scopes:
            - https://www.googleapis.com/auth/compute

@@ -7,7 +7,7 @@ If wanting to use GCP follow the steps under Pre-Reqs.
 
 1. Pull repo down.
 2. from repo directory run `docker build --tag guiprison:1.0 .`
-3. from root run `docker-compose run guiprison bash`
+3. from root run `docker compose run ansible`
 4. Get ansibling! All playbooks are in the `src` directory. The talk goes through various things in the `src/demo` directory which also has a readme 
 detailing what each file is.
 
@@ -16,7 +16,7 @@ detailing what each file is.
 1. You will need docker desktop installed OR [manually install Ansible locally](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on your computer.
 2. You will need to setup a [google service account](https://docs.ansible.com/ansible/latest/scenario_guides/guide_gce.html) for the project you wish to test this on.
 3. For the service account download the json credentials to the root of repository. Save the file as `ansible.json`. 
-# 4. Edit the `src/vars/gce_auth.yml` file and add 
+4. Edit the `\src\demo\gcp_auth.yml` file and add the gcp _project_ you are using. 
 
 #### Optional: Add SSH Keys for GCP
 If you are wanting to administer google compute instances you'll need to also add the SSH keys so Ansible can use them to authenticate to the computer.

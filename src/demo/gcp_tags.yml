@@ -23,6 +23,19 @@
       state: present
     tags:
       - firewall
+  - name: GCP Firewall
+    gcp_compute_firewall:
+      name: ansiblefirewall
+      target_tags:
+      - ansible-ssh
+      source_tags:
+      - ansible-ssh-clients
+      project: "{{ gcp_project }}"
+      auth_kind: "{{ gcp_auth_kind }}"
+      service_account_file: "{{ gcp_credentials_file }}"
+      state: absent
+    tags:
+      - firewalldelete
   - name: Demo Queue
     gcp_cloudtasks_queue:
       name: ansiblequeue
@@ -33,3 +46,4 @@
       state: present
     tags:
       - queue
+      - oslo
